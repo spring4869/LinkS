@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to LinkS</title>
+    <link rel="icon" href="static/pic/svg/logo.svg">
+    <link rel="stylesheet" type="text/css" href="static/css/login.css">
+
+    <script src="static/js/jquery_3.6.0.js"></script>
+</head>
+<body>
+
+<h1 style="font-family: 'Comic Sans MS';font-size: 40px;opacity: 0.5">LinkS</h1>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form action="user/register" method="post">
+            <h2>Register</h2>
+            <input type="text" placeholder="Username" name="username" id="username" onblur="registerAjax()"/>
+            <input type="password" placeholder="Password" name="password" id="password" onblur="registerAjax()"/>
+            <span id="msgA"></span>
+            <br>
+            <button type="submit" disabled="disabled" id="register">Register</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form action="user/login" method="post">
+            <h2>Log in</h2>
+            <input type="text" placeholder="Username" name="username" />
+            <input type="password" placeholder="Password" name="password" />
+            <br>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+
+
+    <div class="overlay-container">
+        <div class="overlay">
+
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome!</h1>
+
+                <button class="ghost" id="signIn">Log In</button>
+            </div>
+
+            <div class="overlay-panel overlay-right">
+                <h1>2022/1/31</h1>
+
+                <button class="ghost" id="signUp">Register</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+
+
+
+
+<script>
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+
+    function registerAjax() {
+        $.ajax({
+            // user/register = http://localhost:8080/LinBlog/user/register
+            // /user/register = http://localhost:8080/user/register
+            url:"user/registerAjax",
+            method:"post",
+            data:{"username":$("#username").val(),"password":$("#password").val()},
+            success:function (data) {
+                $("#msgA").html(data)
+
+                if(data.toString()!=="Welcome"){
+                    $("#register").attr("disabled","true")
+                    $("#msgA").css("color","red");
+                }else{
+                    $("#register").removeAttr("disabled")
+                    $("#msgA").css("color","black");
+                }
+            }
+        })
+    }
+</script>
+</html>

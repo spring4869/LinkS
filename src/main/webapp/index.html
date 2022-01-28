@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LinkS</title>
+  <link rel="icon" href="static/pic/svg/logo.svg">
+  <link rel="stylesheet" type="text/css" href="static/css/index.css">
+
+  <!--    vue-->
+  <script src="static/js/vue_2.5.21.js"></script>
+  <!--    axios-->
+  <script src="static/js/axios_0.21.1.js"></script>
+  <!--    jquery-->
+  <script src="static/js/jquery_3.6.0.js"></script>
+  <!--    vue infinite loading-->
+  <script src="static/js/vue-infinite-loading.js"></script>
+
+  <script src="static/js/main.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div id="header" style="background: url('static/pic/png/top.png') center center">
+    <div class="header-left">
+      <div class="header-name">
+        LinkS
+      </div>
+      <div class="search">
+        <input class="search-input" type="text" placeholder="Search">
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="profile" onclick="redirectLogin()">
+        <div class="profile-head">
+          <img src="user/getProfilePic" height="40px" width="40px"/>
+        </div>
+        <span class="profile-name">{{userInfo.username}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="sidebar">
+      <div class="sidebar-ele" onclick="window.location='index'">
+        <img src="static/pic/svg/home.svg" height="32" width="32"/>
+      </div>
+      <div class="sidebar-ele" onclick="window.location='redirect_link'">
+        <img src="static/pic/svg/edit.svg" height="32" width="32"/>
+      </div>
+      <div class="sidebar-ele" onclick="window.location='redirect_profile'">
+        <img src="static/pic/svg/user.svg" height="32" width="32"/>
+      </div>
+      <div class="sidebar-ele" onclick="window.location='user/logout'">
+        <img src="static/pic/svg/logout.svg" height="32" width="32"/>
+      </div>
+    </div>
+    <div class="display">
+      <div class="mid">
+        <div class="link-main">
+
+          <div class="link-item" v-for="(item) in list">
+            <div class="link-profile">
+              <div class="link-head">
+                <img v-bind:src="item.getLinkProfilePicById" width="40" height="40">
+              </div>
+              <div class="link-username">
+                <p v-text="item.author"/>
+              </div>
+              <div class="link-date">
+                <p v-text="item.timestamp"/>
+              </div>
+            </div>
+            <div class="link-content">
+              <div class="link-content-text" style="height: 80%;width: 90%">
+                <p v-text="item.content"></p>
+              </div>
+            </div>
+            <div class="link-btns">
+              <div class="link-btn">
+                <img src="static/pic/svg/like.svg">
+              </div>
+              <div class="link-btn">
+                <img src="static/pic/svg/comment.svg">
+              </div>
+              <div class="link-btn">
+                <img src="static/pic/svg/star.svg">
+              </div>
+            </div>
+          </div>
+
+          <infinite-loading @infinite="infiniteHandler" spinner="waveDots"></infinite-loading>
+
+        </div>
+      </div>
+      <div class="trend">
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+<style>
+  .link-main{
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 25em;
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  .link-item{
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 45px;
+    display: flex;
+    flex-direction: column;
+    border: #f7f9f9 solid 1px;background-color: #f7f9f9
+  }
+
+  .link-profile{
+    height: 40px;width: 100%;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: gainsboro solid 1px
+  }
+  .link-head{
+    margin-left: 20px;
+    height: 40px;
+    width: 40px;
+  }
+  .link-username{
+    height: 40px;
+    font-weight: bolder
+  }
+  .link-date{
+    height: 40px;
+    width: 100px;
+    font-family: Consolas;
+    font-size: 10px;
+    color: gray
+  }
+  .link-content{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 100%;display:flex;align-items: center;justify-content: center
+  }
+  .link-content p{
+    word-break: break-all;
+  }
+  .link-btns{
+    height: 25px;width: 100%;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;border-top: gainsboro solid 1px
+  }
+  .link-btn:hover{
+    cursor: pointer;
+  }
+</style>
+<script>
+
+
+  // 获取推文内容
+  let jstimestamp = new Date().getTime();
+  new Vue({
+    el: '.link-main',
+
+    data() {
+      return {
+        list: [],
+      };
+    },
+    methods: {
+      infiniteHandler($state) {
+        axios.get("link/getTenlinkByTimestamp",{
+          params:{
+            timeStamp:jstimestamp
+          }
+        }).then(({ data }) => {
+          if (data.length) {
+            // 将请求的时间戳替换为上次请求最后文章的发布时间，以便可以继续请求
+            jstimestamp = data[data.length-1].timestamp
+            // 将时间戳转化为时间格式输出
+            for (let i = 0; i < data.length; i++) {
+              let time = new Date(data[i].timestamp)
+              let year = time.getFullYear()
+              let mouth = time.getMonth()+1
+              let day = time.getDate()
+              let hour = time.getHours()
+              let minute = time.getMinutes()
+              data[i].timestamp = year
+                      +"/"+mouth
+                      +"/"+day
+                      +"/  "+hour
+                      +":"+minute
+              data[i].getLinkProfilePicById = "link/getLinkProfilePicById?author="+data[i].author
+              this.list.push(data[i]);
+            }
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        });
+      },
+    },
+  });
+
+</script>
+
+
+</html>

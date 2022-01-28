@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.LinkS.Dao.LinkMapper">
+
+    <insert id="add" parameterType="com.LinkS.DO.Link">
+        insert into link(id,author,content,timestamp)
+        values (#{id},#{author},#{content},#{timestamp})
+    </insert>
+
+
+    <delete id="delete" parameterType="int">
+        delete from link
+        where id = #{id};
+    </delete>
+
+
+    <select id="query" resultType="com.LinkS.DO.Link">
+        select * from link
+        where id = #{id}
+    </select>
+
+
+    <!--    返回List<Link>,resultType="com.LBlog.DO.Link"即可，也就是元素类型，而不是list类型-->
+    <select id="queryTenLinks" parameterType="long" resultType="com.LinkS.DO.Link">
+        select * from link
+        where timestamp &lt; #{timeStamp}
+        order by timestamp desc
+            limit 10
+    </select>
+
+</mapper>

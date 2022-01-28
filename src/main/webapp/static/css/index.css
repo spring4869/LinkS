@@ -1,0 +1,177 @@
+body{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+
+.container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96em;
+    height: 5em;
+    border-bottom-color: gainsboro;
+    border-bottom-style: solid;
+    overflow: hidden;
+    background-size: 150%;
+}
+
+.header-left {
+    height: 5em;
+    width: 50em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/*linblog图标*/
+.header-name{
+    font-family: "Comic Sans MS";
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px white;
+    -webkit-text-fill-color: transparent;
+}
+
+/*搜索框*/
+.search {
+    border-radius: 20px;
+    height: 40px;
+    display: flex;
+    width: 20em;
+    box-shadow: 0 2px 6px 0 rgba(136, 148, 171, .2), 0 24px 20px -24px rgba(71, 82, 107, .1);
+    overflow: hidden;
+}
+.search-input {
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    width: 300px;
+    font-size: 15px;
+    font-family: "Comic Sans MS";
+    font-weight: lighter;
+}
+.search-input::placeholder {
+    opacity: 0.6;
+}
+
+/*头部右侧信息*/
+.header-right{
+    height: 5em;
+    width: 50em;
+    display: flex;
+    align-items: center;
+}
+
+/*右侧用户信息框*/
+.profile {
+    margin-left: 35em;
+    height: 5em;
+    display: flex;
+    align-items: center;
+}
+.profile:hover{
+    cursor: pointer;
+}
+
+/*右侧用户头像*/
+.profile-head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5em;
+}
+/*右侧用户名*/
+.profile-name{
+    margin-left: 2em;
+    height: 5em;
+    font-size: 16px;
+    color: white;
+    font-family: "Comic Sans MS";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.content {
+    display: flex;
+    height: 90%;
+    width: 100%;
+    flex-direction: row;
+}
+
+
+/*侧边栏*/
+.sidebar {
+    position: absolute;
+    height: 100%;
+    width: 7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border-right: gainsboro solid 2px;
+}
+.sidebar-ele{
+    height: 32px;
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sidebar-ele:hover{
+    cursor: pointer;
+}
+
+
+/*主体显示部分*/
+.display{
+    margin-left: 7em;
+    height: 100%;
+    width: 90em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+/*显示信息部分*/
+.mid {
+    width: 40em;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: gainsboro solid 2px;
+    border-left: gainsboro solid 2px;
+}
+
+
+/*显示趋势部分*/
+.trend {
+    width: 40em;
+    height:100%;
+}
+
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+}

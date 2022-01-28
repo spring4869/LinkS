@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LinkS</title>
+    <link rel="icon" href="static/pic/svg/logo.svg">
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+
+    <!--    vue-->
+    <script src="static/js/vue_2.5.21.js"></script>
+    <!--    axios-->
+    <script src="static/js/axios_0.21.1.js"></script>
+    <!--    jquery-->
+    <script src="static/js/jquery_3.6.0.js"></script>
+
+    <script src="static/js/main.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="header" style="background: url('static/pic/png/top.png') center center">
+        <div class="header-left">
+            <div class="header-name">
+                LinkS
+            </div>
+            <div class="search">
+                <input class="search-input" type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="profile" onclick="redirectSignin()">
+                <div class="profile-head">
+                    <img src="user/getProfilePic" height="40px" width="40px"/>
+                </div>
+                <span class="profile-name">{{userInfo.username}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="sidebar">
+            <div class="sidebar-ele" onclick="window.location='index'">
+                <img src="static/pic/svg/home.svg" height="32" width="32"/>
+            </div>
+            <div class="sidebar-ele" onclick="window.location='redirect_link'">
+                <img src="static/pic/svg/edit.svg" height="32" width="32"/>
+            </div>
+            <div class="sidebar-ele" onclick="window.location='redirect_profile'">
+                <img src="static/pic/svg/user.svg" height="32" width="32"/>
+            </div>
+            <div class="sidebar-ele" onclick="window.location='user/logout'">
+                <img src="static/pic/svg/logout.svg" height="32" width="32"/>
+            </div>
+        </div>
+        <div class="display">
+            <div class="mid">
+                <div style="height: 100%;width: 50%;border-left: gainsboro solid 1px;border-right: gainsboro solid 1px;display: flex;justify-content: center;align-items: center">
+                    <div style="height: 50%;width: 50%;display: flex;justify-content: center;align-items: center">
+                        <img src="user/getProfilePic" height="80px" width="80px"/>
+                        <form method="post" enctype="multipart/form-data" action="user/editHead">
+                            <input type="file" name="file" value="head">
+                            <input type="submit" value="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="trend">
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
