@@ -34,13 +34,13 @@ public class LinkController {
 
     /**主页动态加载link接口
      * */
-    @GetMapping("/getTenlinkByTimestamp")
+    @GetMapping("/getlinksByTimestamp")
     @ResponseBody
     public String getLinks(long timeStamp){
-        List<Link> links =  linkService.getTenLinksByTimestamp(timeStamp);
+        List<Link> newlinks =  linkService.getLinksByTimestamp(timeStamp);
 
-        String tenlink = new Gson().toJson(links);
-        return tenlink;
+        String links = new Gson().toJson(newlinks);
+        return links;
     }
 
 

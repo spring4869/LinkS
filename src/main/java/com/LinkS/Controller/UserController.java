@@ -155,7 +155,7 @@ public class UserController {
 
 
     /*
-     * 返回图片文件，只是实验目前
+     * 返回图片文件
      * */
     @GetMapping("/getProfilePic")
     @ResponseBody

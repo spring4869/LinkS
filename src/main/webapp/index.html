@@ -114,10 +114,10 @@
   .link-item{
     border-radius: 20px;
     width: 100%;
-    margin-top: 45px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
-    border: #f7f9f9 solid 1px;background-color: #f7f9f9
+    border-bottom: #cccccc 1px solid;
   }
 
   .link-profile{
@@ -126,7 +126,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: gainsboro solid 1px
   }
   .link-head{
     margin-left: 20px;
@@ -145,9 +144,14 @@
     color: gray
   }
   .link-content{
+    line-height: 30px;
     margin-top: 1em;
     margin-bottom: 1em;
-    width: 100%;display:flex;align-items: center;justify-content: center
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center
+
   }
   .link-content p{
     word-break: break-all;
@@ -157,7 +161,7 @@
     border-radius: 0 0 20px 20px;
     display: flex;
     justify-content: space-around;
-    align-items: center;border-top: gainsboro solid 1px
+    align-items: center;
   }
   .link-btn:hover{
     cursor: pointer;
@@ -178,7 +182,7 @@
     },
     methods: {
       infiniteHandler($state) {
-        axios.get("link/getTenlinkByTimestamp",{
+        axios.get("link/getlinksByTimestamp",{
           params:{
             timeStamp:jstimestamp
           }
@@ -194,6 +198,18 @@
               let day = time.getDate()
               let hour = time.getHours()
               let minute = time.getMinutes()
+              if(mouth < 10){
+                mouth = '0'+mouth
+              }
+              if(day < 10){
+                day = '0'+day
+              }
+              if(hour < 10){
+                hour = '0'+hour
+              }
+              if(minute < 10){
+                minute = '0'+minute
+              }
               data[i].timestamp = year
                       +"/"+mouth
                       +"/"+day

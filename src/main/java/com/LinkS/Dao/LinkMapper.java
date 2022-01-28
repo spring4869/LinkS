@@ -16,5 +16,5 @@ public interface LinkMapper {
     public Link query(String id);
 
     //    查询timeStamp时间之前的近十条推文
-    public List<Link> queryTenLinks(long timeStamp);
+    public List<Link> queryLinks(long timeStamp);
 }

@@ -23,11 +23,11 @@
 
 
     <!--    返回List<Link>,resultType="com.LBlog.DO.Link"即可，也就是元素类型，而不是list类型-->
-    <select id="queryTenLinks" parameterType="long" resultType="com.LinkS.DO.Link">
+    <select id="queryLinks" parameterType="long" resultType="com.LinkS.DO.Link">
         select * from link
         where timestamp &lt; #{timeStamp}
         order by timestamp desc
-            limit 10
+            limit 5
     </select>
 
 </mapper>

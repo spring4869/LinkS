@@ -7,8 +7,8 @@ import java.util.List;
 public interface LinkService {
 
 
-    //    返回十条timeStamp之前的文字
-    public List<Link> getTenLinksByTimestamp(long timeStamp);
+    //    返回5条timeStamp之前的文字
+    public List<Link> getLinksByTimestamp(long timeStamp);
 
 
     //    用户添加link方法

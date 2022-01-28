@@ -23,9 +23,9 @@ public class LinkServiceImpl implements LinkService {
      * 主页加载links的方法
      * */
     @Override
-    public List<Link> getTenLinksByTimestamp(long timeStamp) {
+    public List<Link> getLinksByTimestamp(long timeStamp) {
 
-        List<Link> links = linkMapper.queryTenLinks(timeStamp);
+        List<Link> links = linkMapper.queryLinks(timeStamp);
 
         return links;
     }

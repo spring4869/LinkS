@@ -81,7 +81,9 @@
 
     const E = window.wangEditor;
     const editor = new E("#toolbar-container", "#text-container");
+    editor.config.uploadImgServer = "user/demo";
     editor.config.menus = [
+        'image',
         'emoticon'
     ]
     editor.create();
